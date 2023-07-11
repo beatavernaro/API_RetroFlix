@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniele\\Documents\\estagio\\Projetos\\LocadoraTeste\\Locadora02\\Locadora02.csproj": {}
+    "C:\\Users\\Beatriz - Tafner\\Documents\\Code\\API\\Locadora2\\Locadora02\\Locadora02.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniele\\Documents\\estagio\\Projetos\\LocadoraTeste\\Locadora02\\Locadora02.csproj": {
+    "C:\\Users\\Beatriz - Tafner\\Documents\\Code\\API\\Locadora2\\Locadora02\\Locadora02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniele\\Documents\\estagio\\Projetos\\LocadoraTeste\\Locadora02\\Locadora02.csproj",
+        "projectUniqueName": "C:\\Users\\Beatriz - Tafner\\Documents\\Code\\API\\Locadora2\\Locadora02\\Locadora02.csproj",
         "projectName": "Locadora02",
-        "projectPath": "C:\\Users\\Daniele\\Documents\\estagio\\Projetos\\LocadoraTeste\\Locadora02\\Locadora02.csproj",
-        "packagesPath": "C:\\Users\\Daniele\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniele\\Documents\\estagio\\Projetos\\LocadoraTeste\\Locadora02\\obj\\",
+        "projectPath": "C:\\Users\\Beatriz - Tafner\\Documents\\Code\\API\\Locadora2\\Locadora02\\Locadora02.csproj",
+        "packagesPath": "C:\\Users\\Beatriz - Tafner\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Beatriz - Tafner\\Documents\\Code\\API\\Locadora2\\Locadora02\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Daniele\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Beatriz - Tafner\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

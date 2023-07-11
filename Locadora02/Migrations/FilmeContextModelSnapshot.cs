@@ -31,6 +31,9 @@ namespace Locadora02.Migrations
                     b.Property<int>("Duracao")
                         .HasColumnType("int");
 
+                    b.Property<int>("Genero")
+                        .HasColumnType("int");
+
                     b.Property<string>("Imagem")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -54,34 +57,13 @@ namespace Locadora02.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("FilmeiD")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FilmeiD");
-
                     b.ToTable("Generos");
-                });
-
-            modelBuilder.Entity("Locadora02.Models.Genero", b =>
-                {
-                    b.HasOne("Locadora02.Models.Filme", "Filme")
-                        .WithMany("Genero")
-                        .HasForeignKey("FilmeiD")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Filme");
-                });
-
-            modelBuilder.Entity("Locadora02.Models.Filme", b =>
-                {
-                    b.Navigation("Genero");
                 });
 #pragma warning restore 612, 618
         }

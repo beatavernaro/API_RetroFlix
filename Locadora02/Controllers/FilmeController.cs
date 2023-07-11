@@ -1,5 +1,6 @@
 ﻿using Locadora02.Data;
 using Locadora02.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Locadora02.Controllers
@@ -10,13 +11,35 @@ namespace Locadora02.Controllers
     {
         private FilmeContext _context;
 
-        
+
         public FilmeController(FilmeContext context)
         {
             _context = context;
         }
 
+        #region FILME
+        //Get Filme
+        [EnableCors("Policy1")]
+        [HttpGet]
+        public IActionResult RecuperaFilmes()
+        {
+            List<Filme> filmes = _context.Filmes.ToList();
+            if (filmes.Count == 0) return NotFound();
+            return Ok(filmes);
+        }
+
+        //Get Filme Buscar Por Id
+        [EnableCors("Policy1")]
+        [HttpGet("{id}")]
+        public IActionResult BuscaFilmesId(int id)
+        {
+            var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if (filme is null) return NotFound();
+            return Ok(filme);
+        }
+
         //Post Filme
+        [EnableCors("Policy1")]
         [HttpPost]
         public IActionResult AdicionaFilme([FromBody] Filme filme)
         {
@@ -26,76 +49,75 @@ namespace Locadora02.Controllers
 
         }
 
-
-        //Post Generos
-        [HttpPost("PostarGeneros")]
-        public IActionResult AdicionaGenero([FromBody] Genero genero)
+        //Put Edita Filme
+        [EnableCors("Policy1")]
+        [HttpPut("{id}")]
+        public IActionResult AtualizaFilme(int id, [FromBody] Filme newfilme)
         {
-            _context.Generos.Add(genero);
+            var filmeEncontrado = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if (filmeEncontrado is null) return NotFound();
+
+            filmeEncontrado.NomeFilme = newfilme.NomeFilme;
+            filmeEncontrado.Sinopse = newfilme.Sinopse;
+            filmeEncontrado.Duracao = newfilme.Duracao;
+            filmeEncontrado.Diretor = newfilme.Diretor;
+            filmeEncontrado.Imagem = newfilme.Imagem;
+            filmeEncontrado.Genero = newfilme.Genero;
+
             _context.SaveChanges();
-            return CreatedAtAction(nameof(BuscaGenerosId), new { id = genero.Id }, genero);
-            
+
+            return Ok();
         }
 
-
-        //Get Filme
-        [HttpGet]
-        public IEnumerable<Filme> RecuperaFilmes() //IEnymerable enumerados de numeros
+        //Delete Filme
+        [EnableCors("Policy1")]
+        [HttpDelete("{id}")]
+        public IActionResult DeletaFilme(int id)
         {
-            return _context.Filmes;
+            var filmeEncontrado = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if (filmeEncontrado is null) return NotFound();
+            _context.Remove(filmeEncontrado);
+            _context.SaveChanges();
+            return NoContent();
+
         }
+        #endregion
 
 
+        #region GENEROS
         //Get Genero
+        [EnableCors("Policy1")]
         [HttpGet("VerGeneros")]
         public IEnumerable<Genero> RecuperaGeneros()
         {
             return _context.Generos;
         }
 
-
-        //Get Filme Buscar Por Id
-        [HttpGet("{id}")]
-        public IActionResult BuscaFilmesId(int id)
-        {
-            var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme == null) return NotFound();
-            return Ok(filme);
-        }
-
-
         //Get Genero Buscar Por Id
-        [HttpGet("BuscaGenerosId {id}")]
+        [EnableCors("Policy1")]
+        [HttpGet("BuscaGenerosId/{id}")]
         public IActionResult BuscaGenerosId(int id)
         {
             var genero = _context.Generos.FirstOrDefault(genero => genero.Id == id);
-            if (genero == null) return NotFound();
+            if (genero is null) return NotFound();
             return Ok(genero);
         }
 
-
-        //Put Edita Filme
-        [HttpPut("{id}")]
-        public IActionResult AtualizaFilme(int id, [FromBody] Filme newfilme)
+        //Post Generos
+        [EnableCors("Policy1")]
+        [HttpPost("PostarGeneros")]
+        public IActionResult AdicionaGenero([FromBody] Genero genero)
         {
-            var filmeEncontrado = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filmeEncontrado == null) return NotFound();
-
-            filmeEncontrado.NomeFilme = newfilme.NomeFilme;
-            filmeEncontrado.Sinopse = newfilme.Sinopse;
-            filmeEncontrado.Duracao = newfilme.Duracao;
-            filmeEncontrado.Diretor = newfilme.Diretor;
-            filmeEncontrado.Imagem = newfilme.Imagem; 
-            //filmeEncontrado.Genero = newfilme.Genero;
-
+            _context.Generos.Add(genero);
             _context.SaveChanges();
+            return CreatedAtAction(nameof(BuscaGenerosId), new { id = genero.Id }, genero);
 
-            return NoContent();
         }
 
 
         //Put edita Genero
-        [HttpPut("EditaGeneroID {id}")]
+        [EnableCors("Policy1")]
+        [HttpPut("EditaGeneroID/{id}")]
         public IActionResult AtualizaGenero(int id, [FromBody] Genero newgenero)
         {
             var generoEncontrado = _context.Generos.FirstOrDefault(genero => genero.Id == id);
@@ -105,33 +127,23 @@ namespace Locadora02.Controllers
 
             _context.SaveChanges();
             return NoContent();
-        } 
-
-
-        //Delete Filme
-        [HttpDelete("{id}")]
-        public IActionResult DeletaFilme(int id, [FromBody] Filme delfilme)
-        {
-            var filmeEncontrado = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filmeEncontrado == null) return NotFound();
-            _context.Remove(filmeEncontrado);
-            _context.SaveChanges();
-            return NoContent();
-            
         }
 
 
         //Delete Genero
-        [HttpDelete("DeleteGeneroId {id}")]
-        public IActionResult DeletaGenero(int id, [FromBody] Genero delgenero)
+        [EnableCors("Policy1")]
+        [HttpDelete("DeleteGeneroId/{id}")]
+        public IActionResult DeletaGenero(int id)
         {
             var generoEncontrado = _context.Generos.FirstOrDefault(genero => genero.Id == id);
             if (generoEncontrado == null) return NotFound();
+
             _context.Remove(generoEncontrado);
             _context.SaveChanges();
+
             return NoContent();
         }
-
+        #endregion
 
 
     }
