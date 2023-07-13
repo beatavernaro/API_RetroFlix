@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Locadora02.Migrations
 {
-    [DbContext(typeof(FilmeContext))]
+    [DbContext(typeof(dbContext))]
     partial class FilmeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

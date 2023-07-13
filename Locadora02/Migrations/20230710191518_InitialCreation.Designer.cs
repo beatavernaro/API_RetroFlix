@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Locadora02.Migrations
 {
-    [DbContext(typeof(FilmeContext))]
+    [DbContext(typeof(dbContext))]
     [Migration("20230710191518_InitialCreation")]
     partial class InitialCreation
     {
