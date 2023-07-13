@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Locadora02.Data
 {
-    public class FilmeContext : DbContext
+    public class dbContext : DbContext
     {
-        public FilmeContext(DbContextOptions<FilmeContext> opts) : base(opts)
+        public dbContext(DbContextOptions<dbContext> opts) : base(opts)
         {
         }
         public DbSet<Filme> Filmes { get; set; }
         public DbSet<Genero> Generos { get; set; }
+
     }
 }
